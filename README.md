@@ -120,8 +120,8 @@ Ensure you have Python 3.10+ (tested through 3.14) and Node.js 18+ installed.
 
 ```bash
 # Clone the repository
-git clone https://github.com/R-HITAISH/SAMYUKTA.git
-cd SAMYUKTA
+git clone https://github.com/R-HITAISH/Samyuktha.git
+cd Samyuktha
 
 # Install Python dependencies
 pip install -r requirements.txt
