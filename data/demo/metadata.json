@@ -1,0 +1,40 @@
+{
+  "data_mode": "DEMO / SYNTHETIC DATA",
+  "created": "2026-10-25T10:40:15.744064",
+  "n_days": 90,
+  "start_date": "2024-06-01",
+  "resolution": 0.5,
+  "lat_range": [
+    6.0,
+    38.0
+  ],
+  "lon_range": [
+    68.0,
+    98.0
+  ],
+  "lead_times": [
+    6,
+    12,
+    24,
+    48,
+    72,
+    120
+  ],
+  "models": [
+    "ncum_g",
+    "ncum_r",
+    "gfs",
+    "wrf",
+    "ai_model"
+  ],
+  "variables": [
+    "rainfall",
+    "temperature",
+    "wind_speed"
+  ],
+  "grid_shape": [
+    65,
+    61
+  ],
+  "WARNING": "This is synthetic demo data. NOT real observations or forecasts."
+}

@@ -1,0 +1,229 @@
+# SAMYUKTA — Intelligent Hybrid Weather Forecast Fusion
+# Master Configuration
+
+project:
+  name: "SAMYUKTA"
+  subtitle: "Intelligent Hybrid Weather Forecast Fusion"
+  version: "1.0.0"
+  sih_id: "SIH26081"
+
+grid:
+  lat_min: 6.0
+  lat_max: 38.0
+  lon_min: 68.0
+  lon_max: 98.0
+  resolution: 0.25  # degrees
+  target_crs: "EPSG:4326"
+
+models:
+  - id: "ncum_g"
+    name: "NCUM-G"
+    description: "NCEP Unified Model - Global"
+    type: "nwp"
+    provider: "NCMRWF"
+    resolution: 0.25
+  - id: "ncum_r"
+    name: "NCUM-R"
+    description: "NCEP Unified Model - Regional"
+    type: "nwp"
+    provider: "NCMRWF"
+    resolution: 0.125
+  - id: "gfs"
+    name: "GFS"
+    description: "Global Forecast System"
+    type: "nwp"
+    provider: "NCEP"
+    resolution: 0.25
+  - id: "wrf"
+    name: "WRF"
+    description: "Weather Research and Forecasting"
+    type: "nwp"
+    provider: "Custom"
+    resolution: 0.1
+  - id: "ai_model"
+    name: "AI-Weather"
+    description: "AI/ML Weather Prediction Model"
+    type: "ai"
+    provider: "AI"
+    resolution: 0.25
+
+variables:
+  - id: "rainfall"
+    name: "Rainfall"
+    unit: "mm"
+    long_name: "Total Precipitation"
+    min_value: 0.0
+    max_value: 1000.0
+  - id: "temperature"
+    name: "Temperature"
+    unit: "°C"
+    long_name: "2m Temperature"
+    min_value: -20.0
+    max_value: 55.0
+  - id: "wind_speed"
+    name: "Wind Speed"
+    unit: "m/s"
+    long_name: "10m Wind Speed"
+    min_value: 0.0
+    max_value: 100.0
+
+lead_times:
+  hours: [6, 12, 24, 48, 72, 120, 168]
+  bins:
+    - label: "0-6h"
+      min: 0
+      max: 6
+    - label: "6-12h"
+      min: 6
+      max: 12
+    - label: "12-24h"
+      min: 12
+      max: 24
+    - label: "1-2d"
+      min: 24
+      max: 48
+    - label: "2-3d"
+      min: 48
+      max: 72
+    - label: "3-5d"
+      min: 72
+      max: 120
+    - label: "5-7d"
+      min: 120
+      max: 168
+
+seasons:
+  - id: "winter"
+    name: "Winter"
+    months: [12, 1, 2]
+  - id: "pre_monsoon"
+    name: "Pre-Monsoon"
+    months: [3, 4, 5]
+  - id: "sw_monsoon"
+    name: "Southwest Monsoon"
+    months: [6, 7, 8, 9]
+  - id: "ne_monsoon"
+    name: "Northeast Monsoon"
+    months: [10, 11]
+
+regions:
+  - id: "india"
+    name: "All India"
+    bbox: [6.0, 68.0, 38.0, 98.0]
+  - id: "north"
+    name: "North India"
+    bbox: [25.0, 72.0, 38.0, 85.0]
+  - id: "south"
+    name: "South India"
+    bbox: [6.0, 73.0, 16.0, 82.0]
+  - id: "east"
+    name: "East India"
+    bbox: [20.0, 82.0, 28.0, 92.0]
+  - id: "west"
+    name: "West India"
+    bbox: [18.0, 68.0, 28.0, 78.0]
+  - id: "central"
+    name: "Central India"
+    bbox: [18.0, 74.0, 26.0, 84.0]
+  - id: "northeast"
+    name: "Northeast India"
+    bbox: [22.0, 88.0, 30.0, 98.0]
+  - id: "coastal_west"
+    name: "West Coast"
+    bbox: [8.0, 72.0, 20.0, 76.0]
+  - id: "coastal_east"
+    name: "East Coast"
+    bbox: [8.0, 78.0, 20.0, 82.0]
+
+weather_regimes:
+  - id: "active_monsoon"
+    name: "Active Monsoon"
+  - id: "break_monsoon"
+    name: "Break Monsoon"
+  - id: "heavy_rainfall"
+    name: "Heavy Rainfall"
+  - id: "convective"
+    name: "Convective"
+  - id: "dry"
+    name: "Dry"
+  - id: "heat_wave"
+    name: "Heat Wave"
+  - id: "high_wind"
+    name: "High Wind"
+  - id: "cyclonic"
+    name: "Cyclone/Synoptic Disturbance"
+  - id: "western_disturbance"
+    name: "Western Disturbance"
+  - id: "coastal_rainfall"
+    name: "Coastal Rainfall"
+  - id: "orographic_rainfall"
+    name: "Orographic Rainfall"
+
+extreme_thresholds:
+  heavy_rainfall:
+    moderate_mm: 64.5
+    heavy_mm: 115.5
+    very_heavy_mm: 204.5
+    extremely_heavy_mm: 244.5
+  heat_wave:
+    plains_threshold_c: 40.0
+    plains_departure_c: 4.5
+    coastal_threshold_c: 37.0
+    severe_departure_c: 6.5
+  high_wind:
+    strong_ms: 17.2
+    gale_ms: 24.5
+    storm_ms: 32.7
+    hurricane_ms: 46.3
+
+alert_thresholds:
+  info:
+    heavy_rain_prob: 0.3
+    heat_wave_prob: 0.3
+    high_wind_prob: 0.3
+  watch:
+    heavy_rain_prob: 0.5
+    heat_wave_prob: 0.5
+    high_wind_prob: 0.5
+  high:
+    heavy_rain_prob: 0.7
+    heat_wave_prob: 0.7
+    high_wind_prob: 0.7
+  critical:
+    heavy_rain_prob: 0.85
+    heat_wave_prob: 0.85
+    high_wind_prob: 0.85
+
+quality:
+  min_coverage: 0.7
+  max_missing_fraction: 0.3
+  stale_hours: 12
+  outlier_sigma: 5.0
+
+training:
+  train_start: "2018-01-01"
+  train_end: "2022-12-31"
+  val_start: "2023-01-01"
+  val_end: "2023-12-31"
+  test_start: "2024-01-01"
+  test_end: "2024-12-31"
+  skill_window_days: 30
+  batch_size: 64
+  learning_rate: 0.001
+  epochs: 50
+  early_stopping_patience: 10
+
+database:
+  url: "sqlite:///data/samyukta.db"
+  echo: false
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["http://localhost:3000", "http://localhost:3001"]
+
+demo:
+  enabled: true
+  label: "DEMO / SYNTHETIC DATA"
+  n_days: 365
+  start_date: "2024-01-01"
